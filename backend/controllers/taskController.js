@@ -13,7 +13,21 @@ exports.createTask = async (req, res) => {
 // GET /tasks
 exports.getTasks = async (req, res) => {
   try {
-    const tasks = await Task.find();
+    const { search, status } = req.query;
+    let filter = {};
+    
+    if (search) {
+      filter.$or = [
+        { title: { $regex: search, $options: 'i' } },
+        { description: { $regex: search, $options: 'i' } }
+      ];
+    }
+    
+    if (status) {
+      filter.status = status;
+    }
+    
+    const tasks = await Task.find(filter);
     res.json(tasks);
   } catch (err) {
     res.status(500).json({ error: err.message });
