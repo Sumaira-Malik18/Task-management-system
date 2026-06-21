@@ -1,5 +1,24 @@
+import { useState } from 'react';
+import { shareTask } from '../services/api';
+
 function TaskDetails({ task, onEdit, onClose }) {
+  const [shareEmail, setShareEmail] = useState('');
+  const [shareMessage, setShareMessage] = useState('');
+  const [shareError, setShareError] = useState('');
+
   if (!task) return null;
+
+  const handleShare = async () => {
+    try {
+      setShareError('');
+      setShareMessage('');
+      await shareTask(task._id, { email: shareEmail });
+      setShareMessage(`Task shared successfully!`);
+      setShareEmail('');
+    } catch (err) {
+      setShareError(err.response?.data?.error || 'Something went wrong');
+    }
+  };
 
   return (
     <div className="bg-white p-6 rounded-lg shadow">
@@ -47,6 +66,28 @@ function TaskDetails({ task, onEdit, onClose }) {
           <p className="text-gray-600">
             {new Date(task.createdAt).toLocaleDateString()}
           </p>
+        </div>
+
+        {/* SHARE TASK SECTION */}
+        <div className="border-t pt-3 mt-2">
+          <span className="text-xs text-gray-400 uppercase">Share Task</span>
+          <div className="flex gap-2 mt-2">
+            <input
+              type="email"
+              placeholder="Enter email to share"
+              value={shareEmail}
+              onChange={(e) => setShareEmail(e.target.value)}
+              className="flex-1 border border-gray-300 rounded p-2 text-sm outline-none focus:border-blue-500"
+            />
+            <button
+              onClick={handleShare}
+              className="bg-green-500 text-white px-3 py-1 rounded text-sm font-bold hover:bg-green-600"
+            >
+              Share
+            </button>
+          </div>
+          {shareMessage && <p className="text-green-600 text-xs mt-1">{shareMessage}</p>}
+          {shareError && <p className="text-red-500 text-xs mt-1">{shareError}</p>}
         </div>
 
         <button
