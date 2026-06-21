@@ -21,12 +21,12 @@ function TaskDetails({ task, onEdit, onClose }) {
   };
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow">
+    <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-xl font-bold text-gray-800">Task Details</h2>
+        <h2 className="text-xl font-bold text-gray-800 dark:text-white">Task Details</h2>
         <button
           onClick={onClose}
-          className="text-gray-500 hover:text-gray-700 font-bold text-lg"
+          className="text-gray-500 dark:text-gray-400 hover:text-gray-700 font-bold text-lg"
         >
           ✕
         </button>
@@ -35,12 +35,12 @@ function TaskDetails({ task, onEdit, onClose }) {
       <div className="flex flex-col gap-3">
         <div>
           <span className="text-xs text-gray-400 uppercase">Title</span>
-          <p className="font-bold text-gray-800">{task.title}</p>
+          <p className="font-bold text-gray-800 dark:text-white">{task.title}</p>
         </div>
 
         <div>
           <span className="text-xs text-gray-400 uppercase">Description</span>
-          <p className="text-gray-600">{task.description || 'No description'}</p>
+          <p className="text-gray-600 dark:text-gray-300">{task.description || 'No description'}</p>
         </div>
 
         <div>
@@ -56,20 +56,20 @@ function TaskDetails({ task, onEdit, onClose }) {
 
         <div>
           <span className="text-xs text-gray-400 uppercase">Due Date</span>
-          <p className="text-gray-600">
+          <p className="text-gray-600 dark:text-gray-300">
             {task.dueDate ? new Date(task.dueDate).toLocaleDateString() : 'No due date'}
           </p>
         </div>
 
         <div>
           <span className="text-xs text-gray-400 uppercase">Created At</span>
-          <p className="text-gray-600">
+          <p className="text-gray-600 dark:text-gray-300">
             {new Date(task.createdAt).toLocaleDateString()}
           </p>
         </div>
 
         {/* SHARE TASK SECTION */}
-        <div className="border-t pt-3 mt-2">
+        <div className="border-t dark:border-gray-700 pt-3 mt-2">
           <span className="text-xs text-gray-400 uppercase">Share Task</span>
           <div className="flex gap-2 mt-2">
             <input
@@ -77,7 +77,7 @@ function TaskDetails({ task, onEdit, onClose }) {
               placeholder="Enter email to share"
               value={shareEmail}
               onChange={(e) => setShareEmail(e.target.value)}
-              className="flex-1 border border-gray-300 rounded p-2 text-sm outline-none focus:border-blue-500"
+              className="flex-1 border border-gray-300 dark:border-gray-600 rounded p-2 text-sm outline-none focus:border-blue-500 bg-white dark:bg-gray-700 text-gray-800 dark:text-white"
             />
             <button
               onClick={handleShare}

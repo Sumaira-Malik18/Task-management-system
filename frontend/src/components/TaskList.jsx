@@ -28,22 +28,26 @@ function TaskList({ onEdit, onSelect, onTasksLoaded }) {
     fetchTasks();
   };
 
-  if (loading) return <div className="text-center p-4">Loading...</div>;
+  if (loading) return (
+    <div className="text-center p-4 text-gray-500 dark:text-gray-400">
+      Loading...
+    </div>
+  );
 
   return (
     <div className="flex flex-col gap-3">
-      
+
       {/* SEARCH BAR */}
       <input
         type="text"
         placeholder="Search tasks..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        className="border border-gray-300 rounded p-2 outline-none focus:border-blue-500"
+        className="border border-gray-300 dark:border-gray-600 rounded p-2 outline-none focus:border-blue-500 bg-white dark:bg-gray-800 text-gray-800 dark:text-white"
       />
 
       {/* FILTER BUTTONS */}
-      <div className="flex gap-2">
+      <div className="flex gap-2 flex-wrap">
         {['', 'Pending', 'In Progress', 'Completed'].map(s => (
           <button
             key={s}
@@ -51,7 +55,7 @@ function TaskList({ onEdit, onSelect, onTasksLoaded }) {
             className={`px-3 py-1 rounded text-sm font-medium ${
               statusFilter === s
                 ? 'bg-blue-500 text-white'
-                : 'bg-gray-200 text-gray-700'
+                : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300'
             }`}
           >
             {s === '' ? 'All' : s}
@@ -61,15 +65,15 @@ function TaskList({ onEdit, onSelect, onTasksLoaded }) {
 
       {/* TASK LIST */}
       {tasks.length === 0 ? (
-        <div className="text-center p-8 text-gray-500">
+        <div className="text-center p-8 text-gray-500 dark:text-gray-400">
           No tasks found!
         </div>
       ) : (
         tasks.map(task => (
-          <div key={task._id} className="bg-white p-4 rounded-lg shadow flex justify-between items-center">
+          <div key={task._id} className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow flex justify-between items-center">
             <div>
-              <h3 className="font-bold text-gray-800">{task.title}</h3>
-              <p className="text-sm text-gray-500">{task.description}</p>
+              <h3 className="font-bold text-gray-800 dark:text-white">{task.title}</h3>
+              <p className="text-sm text-gray-500 dark:text-gray-400">{task.description}</p>
               <span className={`text-xs px-2 py-1 rounded-full ${
                 task.status === 'Completed' ? 'bg-green-100 text-green-700' :
                 task.status === 'In Progress' ? 'bg-blue-100 text-blue-700' :
@@ -77,7 +81,7 @@ function TaskList({ onEdit, onSelect, onTasksLoaded }) {
               }`}>{task.status}</span>
             </div>
             <div className="flex gap-2">
-              <button onClick={() => onSelect(task)} className="bg-gray-100 text-gray-700 px-3 py-1 rounded text-sm">View</button>
+              <button onClick={() => onSelect(task)} className="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-3 py-1 rounded text-sm">View</button>
               <button onClick={() => onEdit(task)} className="bg-blue-500 text-white px-3 py-1 rounded text-sm">Edit</button>
               <button onClick={() => handleDelete(task._id)} className="bg-red-500 text-white px-3 py-1 rounded text-sm">Delete</button>
             </div>

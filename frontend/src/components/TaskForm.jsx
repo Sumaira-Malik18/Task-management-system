@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { createTask, updateTask } from '../services/api';
 
@@ -41,8 +40,8 @@ function TaskForm({ task, onSuccess }) {
   };
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow mb-6">
-      <h2 className="text-xl font-bold mb-4 text-gray-800">
+    <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow mb-6">
+      <h2 className="text-xl font-bold mb-4 text-gray-800 dark:text-white">
         {task ? 'Edit Task' : 'Add New Task'}
       </h2>
       <form onSubmit={handleSubmit} className="flex flex-col gap-3">
@@ -52,7 +51,7 @@ function TaskForm({ task, onSuccess }) {
           placeholder="Task title"
           value={formData.title}
           onChange={handleChange}
-          className="border border-gray-300 rounded p-2 outline-none focus:border-blue-500"
+          className="border border-gray-300 dark:border-gray-600 rounded p-2 outline-none focus:border-blue-500 bg-white dark:bg-gray-700 text-gray-800 dark:text-white"
           required
         />
         <textarea
@@ -60,14 +59,14 @@ function TaskForm({ task, onSuccess }) {
           placeholder="Description (optional)"
           value={formData.description}
           onChange={handleChange}
-          className="border border-gray-300 rounded p-2 outline-none focus:border-blue-500"
+          className="border border-gray-300 dark:border-gray-600 rounded p-2 outline-none focus:border-blue-500 bg-white dark:bg-gray-700 text-gray-800 dark:text-white"
           rows="3"
         />
         <select
           name="status"
           value={formData.status}
           onChange={handleChange}
-          className="border border-gray-300 rounded p-2 outline-none focus:border-blue-500"
+          className="border border-gray-300 dark:border-gray-600 rounded p-2 outline-none focus:border-blue-500 bg-white dark:bg-gray-700 text-gray-800 dark:text-white"
         >
           <option value="Pending">Pending</option>
           <option value="In Progress">In Progress</option>
@@ -78,7 +77,7 @@ function TaskForm({ task, onSuccess }) {
           name="dueDate"
           value={formData.dueDate}
           onChange={handleChange}
-          className="border border-gray-300 rounded p-2 outline-none focus:border-blue-500"
+          className="border border-gray-300 dark:border-gray-600 rounded p-2 outline-none focus:border-blue-500 bg-white dark:bg-gray-700 text-gray-800 dark:text-white"
         />
         <button
           type="submit"

@@ -31,14 +31,14 @@ function Login({ onLogin }) {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-      <div className="bg-white p-8 rounded-lg shadow w-full max-w-md">
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 flex items-center justify-center">
+      <div className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow w-full max-w-md">
         
         <h1 className="text-2xl font-bold text-center text-blue-600 mb-6">
           📋 Task Manager
         </h1>
 
-        <h2 className="text-xl font-bold text-gray-800 mb-4">
+        <h2 className="text-xl font-bold text-gray-800 dark:text-white mb-4">
           {isRegister ? 'Create Account' : 'Welcome Back!'}
         </h2>
 
@@ -56,7 +56,7 @@ function Login({ onLogin }) {
               placeholder="Full name"
               value={formData.name}
               onChange={handleChange}
-              className="border border-gray-300 rounded p-2 outline-none focus:border-blue-500"
+              className="border border-gray-300 dark:border-gray-600 rounded p-2 outline-none focus:border-blue-500 bg-white dark:bg-gray-700 text-gray-800 dark:text-white"
               required
             />
           )}
@@ -66,7 +66,7 @@ function Login({ onLogin }) {
             placeholder="Email address"
             value={formData.email}
             onChange={handleChange}
-            className="border border-gray-300 rounded p-2 outline-none focus:border-blue-500"
+            className="border border-gray-300 dark:border-gray-600 rounded p-2 outline-none focus:border-blue-500 bg-white dark:bg-gray-700 text-gray-800 dark:text-white"
             required
           />
           <input
@@ -75,7 +75,7 @@ function Login({ onLogin }) {
             placeholder="Password"
             value={formData.password}
             onChange={handleChange}
-            className="border border-gray-300 rounded p-2 outline-none focus:border-blue-500"
+            className="border border-gray-300 dark:border-gray-600 rounded p-2 outline-none focus:border-blue-500 bg-white dark:bg-gray-700 text-gray-800 dark:text-white"
             required
           />
           <button
@@ -86,7 +86,7 @@ function Login({ onLogin }) {
           </button>
         </form>
 
-        <p className="text-center text-sm text-gray-500 mt-4">
+        <p className="text-center text-sm text-gray-500 dark:text-gray-400 mt-4">
           {isRegister ? 'Already have an account?' : "Don't have an account?"}
           <button
             onClick={() => setIsRegister(!isRegister)}

@@ -20,6 +20,15 @@ function App() {
   const [notifications, setNotifications] = useState([]);
   const [showNotifications, setShowNotifications] = useState(false);
   const [showAnalytics, setShowAnalytics] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
+
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [darkMode]);
 
   useEffect(() => {
     if (user) {
@@ -57,17 +66,25 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
 
       {/* NAVBAR */}
-      <nav className="bg-blue-600 text-white p-4 shadow flex justify-between items-center">
+      <nav className="bg-blue-600 dark:bg-gray-800 text-white p-4 shadow flex justify-between items-center">
         <h1 className="text-2xl font-bold">📋 Task Manager</h1>
         <div className="flex items-center gap-4">
+
+          {/* DARK MODE TOGGLE */}
+          <button
+            onClick={() => setDarkMode(!darkMode)}
+            className="bg-white text-blue-600 dark:bg-gray-700 dark:text-white px-3 py-1 rounded text-sm font-bold hover:bg-gray-100"
+          >
+            {darkMode ? '☀️ Light' : '🌙 Dark'}
+          </button>
 
           {/* ANALYTICS BUTTON */}
           <button
             onClick={() => setShowAnalytics(true)}
-            className="bg-white text-blue-600 px-3 py-1 rounded text-sm font-bold hover:bg-gray-100"
+            className="bg-white text-blue-600 dark:bg-gray-700 dark:text-white px-3 py-1 rounded text-sm font-bold hover:bg-gray-100"
           >
             📊 Analytics
           </button>
@@ -76,7 +93,7 @@ function App() {
           <div className="relative">
             <button
               onClick={() => setShowNotifications(!showNotifications)}
-              className="relative bg-white text-blue-600 px-3 py-1 rounded text-sm font-bold hover:bg-gray-100"
+              className="relative bg-white text-blue-600 dark:bg-gray-700 dark:text-white px-3 py-1 rounded text-sm font-bold hover:bg-gray-100"
             >
               🔔 {notifications.length > 0 && (
                 <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
@@ -87,9 +104,9 @@ function App() {
 
             {/* NOTIFICATIONS DROPDOWN */}
             {showNotifications && (
-              <div className="absolute right-0 mt-2 w-72 bg-white rounded-lg shadow-lg z-50">
+              <div className="absolute right-0 mt-2 w-72 bg-white dark:bg-gray-800 rounded-lg shadow-lg z-50">
                 <div className="p-3 border-b flex justify-between items-center">
-                  <span className="font-bold text-gray-800">Notifications</span>
+                  <span className="font-bold text-gray-800 dark:text-white">Notifications</span>
                   <button
                     onClick={() => setNotifications([])}
                     className="text-xs text-red-500"
@@ -103,7 +120,7 @@ function App() {
                   </div>
                 ) : (
                   notifications.map((notif, index) => (
-                    <div key={index} className="p-3 border-b text-sm text-gray-700 hover:bg-gray-50">
+                    <div key={index} className="p-3 border-b text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50">
                       {notif.message}
                     </div>
                   ))
@@ -115,7 +132,7 @@ function App() {
           <span className="text-sm">👋 {user.name}</span>
           <button
             onClick={handleLogout}
-            className="bg-white text-blue-600 px-3 py-1 rounded text-sm font-bold hover:bg-gray-100"
+            className="bg-white text-blue-600 dark:bg-gray-700 dark:text-white px-3 py-1 rounded text-sm font-bold hover:bg-gray-100"
           >
             Logout
           </button>
@@ -124,18 +141,18 @@ function App() {
 
       {/* PROGRESS BAR */}
       <div className="max-w-6xl mx-auto px-6 pt-6">
-        <div className="bg-white p-4 rounded-lg shadow mb-2">
+        <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow mb-2">
           <div className="flex justify-between mb-1">
-            <span className="text-sm font-medium text-gray-700">Overall Progress</span>
+            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Overall Progress</span>
             <span className="text-sm font-medium text-blue-600">{percentage}%</span>
           </div>
-          <div className="w-full bg-gray-200 rounded-full h-3">
+          <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3">
             <div
               className="bg-blue-500 h-3 rounded-full transition-all duration-500"
               style={{ width: `${percentage}%` }}
             ></div>
           </div>
-          <p className="text-xs text-gray-500 mt-1">{completed} of {total} tasks completed</p>
+          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{completed} of {total} tasks completed</p>
         </div>
       </div>
 
