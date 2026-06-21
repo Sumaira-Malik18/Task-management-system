@@ -19,6 +19,7 @@ app.use(express.json());
 
 app.use('/tasks', require('./routes/taskRoutes'));
 app.use('/auth', require('./routes/authRoutes'));
+app.use('/analytics', require('./routes/analyticsRoutes'));
 
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('MongoDB Connected'))

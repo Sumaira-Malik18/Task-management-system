@@ -4,6 +4,7 @@ import TaskList from './components/TaskList';
 import TaskForm from './components/TaskForm';
 import TaskDetails from './components/TaskDetails';
 import Login from './components/Login';
+import Analytics from './components/Analytics';
 
 const socket = io('http://localhost:5000');
 
@@ -18,6 +19,7 @@ function App() {
   const [tasks, setTasks] = useState([]);
   const [notifications, setNotifications] = useState([]);
   const [showNotifications, setShowNotifications] = useState(false);
+  const [showAnalytics, setShowAnalytics] = useState(false);
 
   useEffect(() => {
     if (user) {
@@ -61,7 +63,15 @@ function App() {
       <nav className="bg-blue-600 text-white p-4 shadow flex justify-between items-center">
         <h1 className="text-2xl font-bold">📋 Task Manager</h1>
         <div className="flex items-center gap-4">
-          
+
+          {/* ANALYTICS BUTTON */}
+          <button
+            onClick={() => setShowAnalytics(true)}
+            className="bg-white text-blue-600 px-3 py-1 rounded text-sm font-bold hover:bg-gray-100"
+          >
+            📊 Analytics
+          </button>
+
           {/* NOTIFICATIONS BELL */}
           <div className="relative">
             <button
@@ -160,6 +170,12 @@ function App() {
         )}
 
       </div>
+
+      {/* ANALYTICS MODAL */}
+      {showAnalytics && (
+        <Analytics onClose={() => setShowAnalytics(false)} />
+      )}
+
     </div>
   );
 }
