@@ -20,15 +20,19 @@ function App() {
   const [notifications, setNotifications] = useState([]);
   const [showNotifications, setShowNotifications] = useState(false);
   const [showAnalytics, setShowAnalytics] = useState(false);
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(() => {
+  return localStorage.getItem('darkMode') === 'true';
+});
 
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [darkMode]);
+ useEffect(() => {
+ if (darkMode) {
+   document.documentElement.classList.add('dark');
+    localStorage.setItem('darkMode', 'true');
+ } else {
+   document.documentElement.classList.remove('dark');
+    localStorage.setItem('darkMode', 'false');
+ }
+ }, [darkMode]);
 
   useEffect(() => {
     if (user) {
@@ -74,12 +78,21 @@ function App() {
         <div className="flex items-center gap-4">
 
           {/* DARK MODE TOGGLE */}
-          <button
-            onClick={() => setDarkMode(!darkMode)}
-            className="bg-white text-blue-600 dark:bg-gray-700 dark:text-white px-3 py-1 rounded text-sm font-bold hover:bg-gray-100"
-          >
-            {darkMode ? '☀️ Light' : '🌙 Dark'}
-          </button>
+       <button
+  onClick={() => {
+    const newMode = !darkMode;
+    setDarkMode(newMode);
+    localStorage.setItem('darkMode', String(newMode));
+    if (newMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }}
+  className="bg-white text-blue-600 dark:bg-gray-700 dark:text-white px-3 py-1 rounded text-sm font-bold hover:bg-gray-100"
+>
+  {darkMode ? 'Light' : 'Dark'}
+</button>
 
           {/* ANALYTICS BUTTON */}
           <button
