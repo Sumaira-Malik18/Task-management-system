@@ -1,4 +1,3 @@
-### Due to exams I would not be able to deploy the website within given time.
 # Task Management System
 
 A full-stack task management app built with Node.js, Express, MongoDB and React.
